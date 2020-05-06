@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -49,3 +50,26 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+adventurer = Player(room["outside"])
+directions = ["n", "s", "e", "w"]
+
+while True:
+
+    print("\nYou are in the:\t%s\n" %(adventurer.currentRoom.name))
+    print(adventurer.currentRoom.description)
+
+    choice = input("\nSelect the direction in which to proceed [n, s, e, w]\nor press [q] to exit:\n")
+
+    if choice == "q":
+        print("\nYour next adventure awaits!\n")
+        break
+    
+    try:
+        if directions.count(choice) > 0:
+            choiceName = choice + "_to"
+            adventurer.setCurrentRoom(choiceName)
+        else:
+            print("\noops! Please select a cardinal direction [n, s, e, w]\n")
+    except ValueError:
+        print("there was an error, exiting the script now")
+        break
